@@ -25,4 +25,8 @@ class App
   def create_student(age, name = 'unknown', has_permission: true)
     @people_list << Student.new(@classroom, age, name, parent_permission: has_permission)
   end
+
+  def create_teacher(specialization, age, name = 'unknown')
+    @people_list << Teacher.new(specialization, age, name)
+  end
 end
