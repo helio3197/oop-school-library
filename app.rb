@@ -2,12 +2,14 @@ require './book'
 require './classroom'
 require './student'
 require './teacher'
+require './rental'
 
 class App
   def initialize
     @classroom = Classroom.new('Microverse classroom')
     @books_list = []
     @people_list = []
+    @rentals = []
   end
 
   def list_books
@@ -28,5 +30,14 @@ class App
 
   def create_teacher(specialization, age, name = 'unknown')
     @people_list << Teacher.new(specialization, age, name)
+  end
+
+  def list_rental_by_id(id)
+    filter_list = @people_list.filter { |item| item.id == id }
+    filter_list[0].rentals
+  end
+
+  def create_rental(date, book, person)
+    @rentals << Rental.new(date, book, person)
   end
 end
