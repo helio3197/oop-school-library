@@ -87,7 +87,11 @@ end
 def run_selection(selection)
   case selection
   when '1'
-    puts @app.list_books
+    @app.list_books.each do |book|
+      puts "Title: \"#{book.title}\", Author: \"#{book.author}\""
+    end
+
+    print "\n"
   when '2'
     puts @app.list_people[0].class
   when '3'
