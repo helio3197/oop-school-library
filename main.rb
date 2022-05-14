@@ -120,7 +120,7 @@ def print_books_for_rental
   if selection.to_i >= @app.list_books.length || /\D/.match?(selection)
     print "Invalid input.\n\n"
 
-    return create_rental
+    return 'invalid'
   end
 
   print "\n"
@@ -140,7 +140,7 @@ def print_persons_for_rental
   if selection.to_i >= @app.list_people.length || /\D/.match?(selection)
     print "Invalid input.\n\n"
 
-    return create_rental
+    return 'invalid'
   end
 
   print "\n"
@@ -149,12 +149,14 @@ def print_persons_for_rental
 end
 
 def create_rental
-  return print "There aren\'t persons yet.\n\n" if @app.list_people.length.zero?
-  return print "There aren\'t books yet.\n\n" if @app.list_books.length.zero?
+  return print "There aren\'t persons yet.\n\n" if @app.list_people.empty?
+  return print "There aren\'t books yet.\n\n" if @app.list_books.empty?
 
   book_index = print_books_for_rental
+  return create_rental if book_index == 'invalid'
 
   person_index = print_persons_for_rental
+  return create_rental if person_index == 'invalid'
 
   print 'Date: '
   date = gets.chomp
@@ -162,6 +164,34 @@ def create_rental
   @app.create_rental(date, @app.list_books[book_index], @app.list_people[person_index])
 
   puts 'Rental created successfully'
+  print "\n"
+end
+
+def print_rentals_by_id
+  return print "There aren\'t persons yet.\n\n" if @app.list_people.empty?
+
+  print 'ID of person: '
+  id = gets.chomp
+
+  if /\D/.match?(id)
+    print "Invalid ID\n\n"
+
+    return print_rentals_by_id
+  end
+
+  id = id.to_i
+
+  filter_person = @app.list_people.filter { |item| item.id == id }
+
+  return print "There is no person with id = #{id}.\n\n" if filter_person.empty?
+
+  return print "There are no rentals for this person.\n\n" if filter_person[0].rentals.empty?
+
+  puts 'Rentals:'
+  filter_person[0].rentals.each do |rental|
+    puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}"
+  end
+
   print "\n"
 end
 
@@ -177,6 +207,8 @@ def run_selection(selection)
     create_book
   when '5'
     create_rental
+  when '6'
+    print_rentals_by_id
   else
     puts 'Invalid option'
   end
