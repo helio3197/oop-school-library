@@ -72,14 +72,28 @@ def create_person
   end
 end
 
+def create_book
+  print 'Title: '
+  title = gets.chomp
+
+  print 'Author: '
+  author = gets.chomp
+
+  @app.create_book(title, author)
+
+  print "Book created successfully\n\n"
+end
+
 def run_selection(selection)
   case selection
   when '1'
-    @app.list_books
+    puts @app.list_books
   when '2'
     puts @app.list_people[0].class
   when '3'
     create_person
+  when '4'
+    create_book
   else
     puts 'Invalid option'
   end
