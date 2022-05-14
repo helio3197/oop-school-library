@@ -108,6 +108,63 @@ def print_people
   print "\n"
 end
 
+def print_books_for_rental
+  puts 'Select a book from the following list by number'
+
+  @app.list_books.each_with_index do |book, index|
+    puts "#{index}) Title: \"#{book.title}\", Author: \"#{book.author}\""
+  end
+
+  print 'Enter a number: '
+  selection = gets.chomp
+  if selection.to_i >= @app.list_books.length || /\D/.match?(selection)
+    print "Invalid input.\n\n"
+
+    return create_rental
+  end
+
+  print "\n"
+
+  selection.to_i
+end
+
+def print_persons_for_rental
+  puts 'Select a person from the following list by number (not id)'
+
+  @app.list_people.each_with_index do |person, index|
+    puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+  end
+
+  print 'Enter a number: '
+  selection = gets.chomp
+  if selection.to_i >= @app.list_people.length || /\D/.match?(selection)
+    print "Invalid input.\n\n"
+
+    return create_rental
+  end
+
+  print "\n"
+
+  selection.to_i
+end
+
+def create_rental
+  return print "There aren\'t persons yet.\n\n" if @app.list_people.length.zero?
+  return print "There aren\'t books yet.\n\n" if @app.list_books.length.zero?
+
+  book_index = print_books_for_rental
+
+  person_index = print_persons_for_rental
+
+  print 'Date: '
+  date = gets.chomp
+
+  @app.create_rental(date, @app.list_books[book_index], @app.list_people[person_index])
+
+  puts 'Rental created successfully'
+  print "\n"
+end
+
 def run_selection(selection)
   case selection
   when '1'
@@ -118,6 +175,8 @@ def run_selection(selection)
     create_person
   when '4'
     create_book
+  when '5'
+    create_rental
   else
     puts 'Invalid option'
   end
