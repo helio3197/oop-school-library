@@ -195,6 +195,8 @@ def print_rentals_by_id
   print "\n"
 end
 
+# rubocop:disable Metrics/CyclomaticComplexity
+
 def run_selection(selection)
   case selection
   when '1'
@@ -209,10 +211,15 @@ def run_selection(selection)
     create_rental
   when '6'
     print_rentals_by_id
+  when '7'
+    puts 'Thanks for using this app!'
+    exit
   else
-    puts 'Invalid option'
+    print "Invalid option\n\n"
   end
 end
+
+# rubocop:enable Metrics/CyclomaticComplexity
 
 def main
   @app = App.new
