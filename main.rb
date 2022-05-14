@@ -84,16 +84,36 @@ def create_book
   print "Book created successfully\n\n"
 end
 
-def run_selection(selection)
-  case selection
-  when '1'
+def print_books
+  if @app.list_books.length.zero?
+    puts 'There aren\'t books yet.'
+  else
     @app.list_books.each do |book|
       puts "Title: \"#{book.title}\", Author: \"#{book.author}\""
     end
+  end
 
-    print "\n"
+  print "\n"
+end
+
+def print_people
+  if @app.list_people.length.zero?
+    puts 'There aren\'t persons yet.'
+  else
+    @app.list_people.each do |person|
+      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+  end
+
+  print "\n"
+end
+
+def run_selection(selection)
+  case selection
+  when '1'
+    print_books
   when '2'
-    puts @app.list_people[0].class
+    print_people
   when '3'
     create_person
   when '4'
