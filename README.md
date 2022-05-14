@@ -37,7 +37,7 @@ $ bundle install
 
 - Run:
 ```
-$ ruby person.rb
+$ ruby main.rb
 ```
 
 - Edit the content as you like.
