@@ -4,6 +4,8 @@
 
 > An OOP Ruby app for a school library
 
+![UML Diagram](https://raw.githubusercontent.com/microverseinc/curriculum-ruby/main/oop/images/uml_class_diagram.png?token=GHSAT0AAAAAABO2QIDXHQEB37PLXGAA5W6GYUBFF4A)
+
 
 ## Built With
 
