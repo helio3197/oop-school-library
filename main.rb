@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require './app'
+require 'storage_file'
+require 'read_file'
 
 def print_options
   puts 'Please choose an option by entering a number:
@@ -39,6 +41,7 @@ def create_student
   @app.create_student(age, name, has_permission: permission)
 
   print "Person created successfully\n\n"
+  save_person(person)
 end
 
 def create_teacher
@@ -47,6 +50,7 @@ def create_teacher
   if /\D/.match?(age) || age.length.zero?
     puts 'Invalid input. Age field must contain only integers.'
     return create_person
+
   end
 
   print 'Name: '
@@ -58,6 +62,7 @@ def create_teacher
   @app.create_teacher(specialization, age, name)
 
   print "Person created successfully\n\n"
+  save_person(person)
 end
 
 def create_person
@@ -84,6 +89,7 @@ def create_book
   @app.create_book(title, author)
 
   print "Book created successfully\n\n"
+  save_book(books)
 end
 
 def print_books
@@ -166,6 +172,7 @@ def create_rental
   @app.create_rental(date, @app.list_books[book_index], @app.list_people[person_index])
 
   puts 'Rental created successfully'
+  save_rental(rentals)
   print "\n"
 end
 
