@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require './app'
+require_relative 'storage_file'
+require_relative 'read_file'
 
 def print_options
   puts 'Please choose an option by entering a number:
@@ -47,6 +49,7 @@ def create_teacher
   if /\D/.match?(age) || age.length.zero?
     puts 'Invalid input. Age field must contain only integers.'
     return create_person
+
   end
 
   print 'Name: '
@@ -197,6 +200,12 @@ def print_rentals_by_id
   print "\n"
 end
 
+def save_data
+  save_persons(@app.people_list)
+  save_books(@app.books_list)
+  save_rentals(@app.rentals)
+end
+
 # rubocop:disable Metrics/CyclomaticComplexity
 
 def run_selection(selection)
@@ -215,6 +224,8 @@ def run_selection(selection)
     print_rentals_by_id
   when '7'
     puts 'Thanks for using this app!'
+    save_data
+
     exit
   else
     print "Invalid option\n\n"
@@ -224,7 +235,13 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 
 def main
-  @app = App.new
+  books = read_books
+  read = read_people
+  persons = read[0]
+  classroom = read[1]
+  rentals = read_rentals(books, persons)
+
+  @app = App.new(books, persons, classroom, rentals)
   Kernel.loop { run_selection(print_options) }
 end
 

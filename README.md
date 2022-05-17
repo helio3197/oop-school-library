@@ -4,7 +4,7 @@
 
 > An OOP Ruby app for a school library
 
-![UML Diagram](https://raw.githubusercontent.com/microverseinc/curriculum-ruby/main/oop/images/uml_class_diagram.png?token=GHSAT0AAAAAABO2QIDXHQEB37PLXGAA5W6GYUBFF4A)
+![UML Diagram](uml_class_diagram.png)
 
 
 ## Built With
@@ -52,6 +52,11 @@ $ ruby main.rb
 - GitHub: [@helio3197](https://github.com/helio3197)
 - Twitter: [@kennysalazar31](https://twitter.com/kennysalazar31)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/kenny-salazar-1a1687110)
+
+👤 **Mauro Vasconcelos**
+
+- GitHub: [@vanillainanutshell](https://github.com/vanillainanutshell)
+- LinkedIn: [Mauro Vasconcelos](https://www.linkedin.com/in/vanillainanutshell/)
 
 
 ## 🤝 Contributing
