@@ -5,6 +5,8 @@ require './teacher'
 require './rental'
 
 class App
+  attr_reader :books_list, :people_list, :rentals
+
   def initialize
     @classroom = Classroom.new('Microverse classroom')
     @books_list = []

@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require './app'
-require 'storage_file'
-require 'read_file'
+require_relative 'storage_file'
+require_relative 'read_file'
 
 def print_options
   puts 'Please choose an option by entering a number:
@@ -41,7 +41,6 @@ def create_student
   @app.create_student(age, name, has_permission: permission)
 
   print "Person created successfully\n\n"
-  save_person(person)
 end
 
 def create_teacher
@@ -62,7 +61,6 @@ def create_teacher
   @app.create_teacher(specialization, age, name)
 
   print "Person created successfully\n\n"
-  save_person(person)
 end
 
 def create_person
@@ -89,7 +87,6 @@ def create_book
   @app.create_book(title, author)
 
   print "Book created successfully\n\n"
-  save_book(books)
 end
 
 def print_books
@@ -172,7 +169,6 @@ def create_rental
   @app.create_rental(date, @app.list_books[book_index], @app.list_people[person_index])
 
   puts 'Rental created successfully'
-  save_rental(rentals)
   print "\n"
 end
 
@@ -204,6 +200,12 @@ def print_rentals_by_id
   print "\n"
 end
 
+def save_data
+  save_persons(@app.people_list)
+  save_books(@app.books_list)
+  save_rentals(@app.rentals)
+end
+
 # rubocop:disable Metrics/CyclomaticComplexity
 
 def run_selection(selection)
@@ -222,6 +224,7 @@ def run_selection(selection)
     print_rentals_by_id
   when '7'
     puts 'Thanks for using this app!'
+
     exit
   else
     print "Invalid option\n\n"
