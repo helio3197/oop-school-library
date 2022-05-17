@@ -53,6 +53,11 @@ $ ruby main.rb
 - Twitter: [@kennysalazar31](https://twitter.com/kennysalazar31)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/kenny-salazar-1a1687110)
 
+👤 **Mauro Vasconcelos**
+
+- GitHub: [@vanillainanutshell](https://github.com/vanillainanutshell)
+- LinkedIn: [Mauro Vasconcelos](https://www.linkedin.com/in/vanillainanutshell/)
+
 
 ## 🤝 Contributing
 

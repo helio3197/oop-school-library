@@ -7,11 +7,11 @@ require './rental'
 class App
   attr_reader :books_list, :people_list, :rentals
 
-  def initialize
-    @classroom = Classroom.new('Microverse classroom')
-    @books_list = []
-    @people_list = []
-    @rentals = []
+  def initialize(books_list, people_list, classroom, rentals)
+    @classroom = classroom || Classroom.new('Microverse classroom')
+    @books_list = books_list
+    @people_list = people_list
+    @rentals = rentals
   end
 
   def list_books

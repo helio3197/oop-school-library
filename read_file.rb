@@ -1,4 +1,5 @@
-require  'json'
+require 'json'
+require_relative 'classroom'
 require_relative 'book'
 require_relative 'person'
 require_relative 'student'
@@ -6,41 +7,42 @@ require_relative 'teacher'
 require_relative 'rental'
 
 def read_books
-    data = []
-    if  File.exist?('books.json')
-        books_data = JSON.parse(File.read('books.json'))
-        books_data.each do |book|
-            data.push(Book.new(book['title'], book['author'], book['id']))
-        end
+  data = []
+  if File.exist?('books.json')
+    books_data = JSON.parse(File.read('books.json'))
+    books_data.each do |book|
+      data.push(Book.new(book['title'], book['author'], book['id']))
     end
-    data
+  end
+  data
 end
 
 def read_people
-    person = []
-    if File.exist?('people.json')
-        people_data = JSON.parse(File.read('people.json'))
-        people_data.each do |person|
-            if person['specialization']
-                people.push(Teacher.new(person['age'], person['name'], person['specialization'], id: person['id']))
-            else
-                people.push(Student.new(person['age'], person['name'], parent_permission: person['parent_permission'], id: person['id']))
-
-            end
-        end
-    end
-    person
-end
-
-def read_rentals(books, people)
-    rentals = []
-    if File.exist?('rentals.json')
-      rentals_data = JSON.parse(File.read('rentals.json'))
-      rentals_data.each do |rental|
-        person = people.select { |item| item.id == rental['person_id'] }
-        book = books.select { |item| item.id == rental['book_id'] }
-        rentals.push(Rental.new(rental['date'], person[0], book[0]))
+  persons = []
+  if File.exist?('persons.json')
+    classroom = Classroom.new('Microverse classroom')
+    people_data = JSON.parse(File.read('persons.json'))
+    people_data.each do |person|
+      if person['specialization']
+        persons.push(Teacher.new(person['specialization'], person['age'], person['name'], person['id']))
+      else
+        persons.push(Student.new(classroom, person['age'], person['name'], person['id'],
+                                 parent_permission: person['parent_permission']))
       end
     end
-    rentals
   end
+  [persons, classroom]
+end
+
+def read_rentals(books, persons)
+  rentals = []
+  if File.exist?('rentals.json')
+    rentals_data = JSON.parse(File.read('rentals.json'))
+    rentals_data.each do |rental|
+      person = persons.select { |item| item.id == rental['person_id'] }
+      book = books.select { |item| item.id == rental['book_id'] }
+      rentals.push(Rental.new(rental['date'], book[0], person[0]))
+    end
+  end
+  rentals
+end

@@ -5,7 +5,7 @@ require_relative 'student'
 require_relative 'person'
 
 def save_persons(persons)
-  person_data = File.exist?('persons.json') ? JSON.parse(File.read('persons.json')) : []
+  person_data = []
   persons.each do |person|
     if person.instance_of?(Teacher)
       person_data.push({ id: person.id, name: person.name, age: person.age,
@@ -19,7 +19,7 @@ def save_persons(persons)
 end
 
 def save_books(books)
-  books_arr = File.exist?('books.json') ? JSON.parse(File.read('books.json')) : []
+  books_arr = []
   books.each do |book|
     books_arr.push({ id: book.id, title: book.title, author: book.author })
   end
@@ -27,7 +27,7 @@ def save_books(books)
 end
 
 def save_rentals(rentals)
-  rentals_data = File.exist?('rentals.json') ? JSON.parse(File.read('rentals.json')) : []
+  rentals_data = []
   rentals.each do |rental|
     rentals_data.push({ date: rental.date, person_id: rental.person.id, book_id: rental.book.id })
   end

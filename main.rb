@@ -235,7 +235,13 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 
 def main
-  @app = App.new
+  books = read_books
+  read = read_people
+  persons = read[0]
+  classroom = read[1]
+  rentals = read_rentals(books, persons)
+
+  @app = App.new(books, persons, classroom, rentals)
   Kernel.loop { run_selection(print_options) }
 end
 
