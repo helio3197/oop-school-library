@@ -224,6 +224,7 @@ def run_selection(selection)
     print_rentals_by_id
   when '7'
     puts 'Thanks for using this app!'
+    save_data
 
     exit
   else
