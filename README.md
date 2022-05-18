@@ -42,6 +42,11 @@ $ bundle install
 $ ruby main.rb
 ```
 
+- Tests:
+```
+$ rspec
+```
+
 - Edit the content as you like.
 
 
