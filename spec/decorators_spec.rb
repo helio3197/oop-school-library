@@ -25,7 +25,8 @@ describe 'Tests for decorator classes' do
   end
 
   context TrimmerDecorator do
-    it 'A TrimmerDecorator decorator should return a trimmed string for correct_name method when the string length is more than 10' do
+    it 'A TrimmerDecorator decorator should return a trimmed string for correct_name method when the
+     string length is more than 10' do
       person = double('person')
       allow(person).to receive(:correct_name) { 'testtesttest' }
 
